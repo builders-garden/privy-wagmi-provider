@@ -74,7 +74,7 @@ import { usePrivyWagmiProvider } from '@buildersgarden/privy-wagmi-provider';
 
 /* your code */
 
-const [connect, isConnected, isReady, wallet, address] =
+const { connect, isConnected, isReady, wallet, address } =
   usePrivyWagmiProvider();
 
 /* your code */
