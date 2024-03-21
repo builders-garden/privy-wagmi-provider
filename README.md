@@ -80,6 +80,25 @@ const { connect, isConnected, isReady, wallet, address } =
 /* your code */
 ```
 
+### 🪙 useERC20 hooks
+
+The library comes with several useful hooks to interact with ERC20 tokens. This is a list of the hooks available:
+
+- `useERC20Transfer` - hook to transfer ERC20 tokens;
+- `useERC20TransferFrom`- hook to transfer ERC20 tokens from an address to another;
+- `useERC20Approve`- hook to approve ERC20 tokens spending;
+- `useERC20Allowance` - hook to get the allowance of an address to spend ERC20 tokens;
+- `useERC20BalanceOf` - hook to get the balance of an address for an ERC20 token;
+- `useERC20TotalSupply` - hook to get the total supply of an ERC20 token;
+- `useERC20Decimals` - hook to get the decimals of an ERC20 token;
+- `useERC20Symbol` - hook to get the symbol of an ERC20 token.
+
+These hooks are just wrappers around the `useWriteContract` and `useReadContract` hooks provided by `wagmi`. In case you need more control over the contract interaction, you should use the "native" hooks directly.
+
 ## 👇 Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+
+```
+
+```
