@@ -1,31 +1,60 @@
-# @bg/privy-wagmi-hooks
+# 🌳 @bg/privy-wagmi-provider
 
-React native hooks for using Privy + Wagmi in your native app.
+React native provider for using Privy + Wagmi in your native app.
 
-## Installation
+## 📦 Installation
 
-```sh
-npm install @bg/privy-wagmi-hooks
+```bash
+npm install @bg/privy-wagmi-provider # using npm
+yarn add @bg/privy-wagmi-provider # using yarn
+bun add @bg/privy-wagmi-provider # using bun
 ```
 
-## Usage
+## 🛠️ Usage
 
-```js
-import { multiply } from '@bg/privy-wagmi-hooks';
+Once the package is installed in your app, you first need to import the `polyfills` module from the package in your app's entry file (e.g. `index.js` or `App.js`).
 
-// ...
-
-const result = await multiply(3, 7);
+```typescript
+import '@bg/privy-wagmi-provider/polyfills';
 ```
 
-## Contributing
+In case you are already using polyfills in your app, then you **must** check if what you're using is enough to support this package. If not, you should add one or more missing polyfills from this list:
+
+```typescript
+import 'fast-text-encoding';
+import 'node-libs-expo/globals';
+import 'react-native-url-polyfill/auto';
+import 'react-native-get-random-values';
+import '@ethersproject/shims';
+```
+
+Then you can use the `PrivyWagmiProvider` component in your app to provide the `Privy` and `Wagmi` instances to your app.
+
+```typescript
+import React from 'react';
+import { PrivyWagmiProvider } from '@bg/privy-wagmi-provider';
+import { QueryClient } from '@tanstack/react-query';
+import { WagmiProvider, createConfig, http } from 'wagmi';
+import { base } from 'viem/chains';
+
+const queryClient = new QueryClient();
+
+const wagmiConfig = createConfig({
+  chains: [base],
+  transports: {
+    [base.id]: http(),
+  },
+});
+
+export default function App() {
+  return (
+    <PrivyWagmiProvider config={wagmiConfig} queryClient={queryClient}>
+      {/* Your app */}
+    </PrivyWagmiProvider>
+  );
+}
+```
+
+## 👇 Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## License
-
-MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)

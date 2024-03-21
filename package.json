@@ -1,7 +1,7 @@
 {
-  "name": "@bg/privy-wagmi-hooks",
+  "name": "@bg/privy-wagmi-provider",
   "version": "0.1.0",
-  "description": "React native hooks for using Privy + Wagmi in your native app.",
+  "description": "React native provider for using Privy + Wagmi in your native app.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
@@ -26,7 +26,7 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace @bg/privy-wagmi-hooks-example",
+    "example": "yarn workspace @bg/privy-wagmi-provider-example",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
@@ -41,14 +41,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/builders-garden/privy-wagmi-hooks.git"
+    "url": "git+https://github.com/builders-garden/privy-wagmi-provider.git"
   },
   "author": "builders.garden <gm@builders.garden> (https://github.com/builders-garden)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/builders-garden/privy-wagmi-hooks/issues"
+    "url": "https://github.com/builders-garden/privy-wagmi-provider/issues"
   },
-  "homepage": "https://github.com/builders-garden/privy-wagmi-hooks#readme",
+  "homepage": "https://github.com/builders-garden/privy-wagmi-provider#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -155,5 +155,16 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "@ethersproject/shims": "^5.7.0",
+    "@privy-io/expo": "^0.9.1",
+    "@tanstack/react-query": "^5.28.6",
+    "fast-text-encoding": "^1.0.6",
+    "node-libs-expo": "^0.0.3",
+    "react-native-get-random-values": "^1.11.0",
+    "react-native-url-polyfill": "^2.0.0",
+    "viem": "^2.8.16",
+    "wagmi": "^2.5.12"
   }
 }
