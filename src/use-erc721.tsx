@@ -263,3 +263,26 @@ export const useERC721TotalSupply = ({
 
   return { totalSupply, refetch, isLoading, isError, error };
 };
+
+/**
+ * @dev This hook is used to get the symbol of the ERC721 token.
+ * @param {UseERC721Params} params - The address of the ERC721 token and the network to use.
+ * @returns the symbol, refetch function, isLoading, isError, and error.
+ */
+export const useERC721Symbol = ({ address, network }: UseERC721Params) => {
+  const chainId = useChainId();
+  const {
+    data: symbol,
+    refetch,
+    isLoading,
+    isError,
+    error,
+  } = useReadContract({
+    abi: erc721Abi,
+    functionName: 'symbol',
+    address,
+    chainId: network || chainId,
+  });
+
+  return { symbol, refetch, isLoading, isError, error };
+};

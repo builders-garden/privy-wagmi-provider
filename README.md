@@ -95,6 +95,19 @@ The library comes with several useful hooks to interact with ERC20 tokens. This 
 
 These hooks are just wrappers around the `useWriteContract` and `useReadContract` hooks provided by `wagmi`. In case you need more control over the contract interaction, you should use the "native" hooks directly.
 
+### 🖼️ useERC721 hooks
+
+The library comes with several useful hooks to interact with ERC721 tokens. This is a list of the hooks available:
+
+- `useERC721Transfer` - hook to transfer ERC721 tokens;
+- `useERC721Approve`- hook to approve ERC721 tokens spending;
+- `useERC721Allowance` - hook to get the allowance of an address to spend ERC721 tokens;
+- `useERC721BalanceOf` - hook to get the balance of an address for an ERC721 token;
+- `useERC721TotalSupply` - hook to get the total supply of an ERC721 token;
+- `useERC721TokenURI` - hook to get the token URI of an ERC721 token;
+- `useERC721OwnerOf` - hook to get the owner of an ERC721 token;
+- `useERC721Symbol` - hook to get the symbol of an ERC721 token.
+
 ## 👇 Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
