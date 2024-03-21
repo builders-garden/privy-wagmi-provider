@@ -201,16 +201,20 @@ export const useERC20Approve = ({ address, network }: UseERC20Params) => {
   return execute;
 };
 
+export type UseERC20AllowanceParams = UseERC20Params & {
+  args: [`0x${string}`, `0x${string}`];
+};
+
 /**
  * @dev This hook is used to get the allowance that the first address has given to the second one.
- * @param {UseERC20Params} params - The address of the ERC20 token and the network to use.
+ * @param {UseERC20AllowanceParams} params - The address of the ERC20 token and the network to use.
  * @returns the allowance, refetch function, isLoading, isError, and error.
  */
 export const useERC20Allowance = ({
   address,
   network,
   args,
-}: UseERC20Params & { args: [`0x${string}`, `0x${string}`] }) => {
+}: UseERC20AllowanceParams) => {
   const chainId = useChainId();
   const {
     data: allowance,
@@ -229,16 +233,20 @@ export const useERC20Allowance = ({
   return { allowance, refetch, isLoading, isError, error };
 };
 
+export type UseERC20BalanceOfParams = UseERC20Params & {
+  args: [`0x${string}`];
+};
+
 /**
  * @dev This hook is used to get the balance of the specified address.
- * @param {UseERC20Params} params - The address of the ERC20 token and the network to use.
+ * @param {UseERC20BalanceOfParams} params - The address of the ERC20 token and the network to use.
  * @returns the balance, refetch function, isLoading, isError, and error.
  */
 export const useERC20BalanceOf = ({
   address,
   network,
   args,
-}: UseERC20Params & { args: [`0x${string}`] }) => {
+}: UseERC20BalanceOfParams) => {
   const chainId = useChainId();
   const {
     data: balance,
