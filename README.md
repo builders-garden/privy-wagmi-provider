@@ -1,13 +1,13 @@
-# 🌳 @bg/privy-wagmi-provider
+# 🌳 @buildersgarden/privy-wagmi-provider
 
 React native provider for using Privy + Wagmi in your native app.
 
 ## 📦 Installation
 
 ```bash
-npm install @bg/privy-wagmi-provider # using npm
-yarn add @bg/privy-wagmi-provider # using yarn
-bun add @bg/privy-wagmi-provider # using bun
+npm install @buildersgarden/privy-wagmi-provider # using npm
+yarn add @buildersgarden/privy-wagmi-provider # using yarn
+bun add @buildersgarden/privy-wagmi-provider # using bun
 ```
 
 ## 🛠️ Usage
@@ -15,7 +15,7 @@ bun add @bg/privy-wagmi-provider # using bun
 Once the package is installed in your app, you first need to import the `polyfills` module from the package in your app's entry file (e.g. `index.js` or `App.js`).
 
 ```typescript
-import '@bg/privy-wagmi-provider/polyfills';
+import '@buildersgarden/privy-wagmi-provider/polyfills';
 ```
 
 In case you are already using polyfills in your app, then you **must** check if what you're using is enough to support this package. If not, you should add one or more missing polyfills from this list:
@@ -32,7 +32,7 @@ Then you can use the `PrivyWagmiProvider` component in your app to provide the `
 
 ```typescript
 import React from 'react';
-import { PrivyWagmiProvider } from '@bg/privy-wagmi-provider';
+import { PrivyWagmiProvider } from '@buildersgarden/privy-wagmi-provider';
 import { QueryClient } from '@tanstack/react-query';
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import { base } from 'viem/chains';
@@ -58,7 +58,7 @@ export default function App() {
 Then you can use the `usePrivyWagmiProvider` hook to connect the user wallet:
 
 ```typescript
-import { usePrivyWagmiProvider } from '@bg/privy-wagmi-provider';
+import { usePrivyWagmiProvider } from '@buildersgarden/privy-wagmi-provider';
 
 /* your code */
 

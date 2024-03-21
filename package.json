@@ -1,5 +1,5 @@
 {
-  "name": "@bg/privy-wagmi-provider",
+  "name": "@buildersgarden/privy-wagmi-provider",
   "version": "0.1.0",
   "description": "React native provider for using Privy + Wagmi in your native app.",
   "main": "lib/commonjs/index",
@@ -26,7 +26,7 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace @bg/privy-wagmi-provider-example",
+    "example": "yarn workspace @buildersgarden/privy-wagmi-provider-example",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",

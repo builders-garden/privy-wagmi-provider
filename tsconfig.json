@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "@bg/privy-wagmi-hooks": ["./src/index"]
+      "@buildersgarden/privy-wagmi-hooks": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
