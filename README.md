@@ -55,6 +55,19 @@ export default function App() {
 }
 ```
 
+Then you can use the `usePrivyWagmiProvider` hook to connect the user wallet:
+
+```typescript
+import { usePrivyWagmiProvider } from '@bg/privy-wagmi-provider';
+
+/* your code */
+
+const [connect, isConnected, isReady, wallet, address] =
+  usePrivyWagmiProvider();
+
+/* your code */
+```
+
 ## 👇 Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
