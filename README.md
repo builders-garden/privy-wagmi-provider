@@ -10,15 +10,17 @@ yarn add @buildersgarden/privy-wagmi-provider # using yarn
 bun add @buildersgarden/privy-wagmi-provider # using bun
 ```
 
-## 🛠️ Usage
+### 🤝 Peer dependencies
 
-Once the package is installed in your app, you first need to import the `polyfills` module from the package in your app's entry file (e.g. `index.js` or `App.js`).
+This project has some peer dependencies that you need to install in your app in order to make it work:
 
-```typescript
-import '@buildersgarden/privy-wagmi-provider/polyfills';
+```bash
+npm install @tanstack/react-query wagmi viem # using npm
+yarn add @tanstack/react-query wagmi viem # using yarn
+bun add @tanstack/react-query wagmi viem # using bun
 ```
 
-In case you are already using polyfills in your app, then you **must** check if what you're using is enough to support this package. If not, you should add one or more missing polyfills from this list:
+Once the package and its peer dependencies are installed in your app, you **must** import the following `polyfills` in your app entrypoint:
 
 ```typescript
 import 'fast-text-encoding';
@@ -28,7 +30,17 @@ import 'react-native-get-random-values';
 import '@ethersproject/shims';
 ```
 
-Then you can use the `PrivyWagmiProvider` component in your app to provide the `Privy` and `Wagmi` instances to your app.
+In case you don't already have these polyfills installed, make sure to run the following command:
+
+```bash
+npm install fast-text-encoding node-libs-expo react-native-url-polyfill react-native-get-random-values @ethersproject/shims # using npm
+yarn add fast-text-encoding node-libs-expo react-native-url-polyfill react-native-get-random-values @ethersproject/shims # using yarn
+bun add fast-text-encoding node-libs-expo react-native-url-polyfill react-native-get-random-values @ethersproject/shims # using bun
+```
+
+## 🛠️ Usage
+
+You can use the `PrivyWagmiProvider` component in your app to start connecting the user and to use the `wagmi` hooks inside your react native app.
 
 ```typescript
 import React from 'react';
