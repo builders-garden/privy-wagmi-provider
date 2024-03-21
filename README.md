@@ -111,7 +111,3 @@ The library comes with several useful hooks to interact with ERC721 tokens. This
 ## 👇 Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-```
-
-```
