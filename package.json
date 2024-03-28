@@ -1,6 +1,6 @@
 {
   "name": "@buildersgarden/privy-wagmi-provider",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "React native provider for using Privy + Wagmi in your native app.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
