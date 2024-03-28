@@ -4,9 +4,8 @@ import {
   useReadContract,
   useWriteContract,
 } from 'wagmi';
-import { usePrivyWagmiProvider } from './privy-wagmi-provider';
-import { useCallback, useEffect, useState } from 'react';
-import { erc20Abi, type TransactionReceipt } from 'viem';
+import { useCallback } from 'react';
+import { erc20Abi } from 'viem';
 import { waitForTransactionReceipt } from 'viem/actions';
 
 export type UseERC20Params = {
@@ -20,20 +19,7 @@ export type UseERC20Params = {
  * @returns execute function that calls the transfer function of the ERC20 token.
  */
 export const useERC20Transfer = ({ address, network }: UseERC20Params) => {
-  const { wallet, isReady } = usePrivyWagmiProvider();
   const { writeContractAsync } = useWriteContract();
-  const [execute, setExecute] =
-    useState<
-      ({
-        to,
-        amount,
-        waitForTx,
-      }: {
-        to: `0x${string}`;
-        amount: bigint;
-        waitForTx?: boolean;
-      }) => Promise<`0x${string}` | TransactionReceipt>
-    >();
   const chainId = useChainId();
   const publicClient = usePublicClient({
     chainId: network || chainId,
@@ -66,37 +52,15 @@ export const useERC20Transfer = ({ address, network }: UseERC20Params) => {
     [address, chainId, network, publicClient, writeContractAsync]
   );
 
-  useEffect(() => {
-    if (isReady && wallet) {
-      setExecute(executeFn);
-    }
-  }, [isReady, wallet, executeFn]);
-
-  return execute;
+  return executeFn;
 };
-
 /**
  * @dev This hook is used to transfer ERC20 tokens from one address to another.
  * @param {UseERC20Params} params - The address of the ERC20 token and the network to use.
  * @returns execute function that calls the transferFrom function of the ERC20 token.
  */
 export const useERC20TransferFrom = ({ address, network }: UseERC20Params) => {
-  const { wallet, isReady } = usePrivyWagmiProvider();
   const { writeContractAsync } = useWriteContract();
-  const [execute, setExecute] =
-    useState<
-      ({
-        from,
-        to,
-        amount,
-        waitForTx,
-      }: {
-        from: `0x${string}`;
-        to: `0x${string}`;
-        amount: bigint;
-        waitForTx: boolean;
-      }) => Promise<`0x${string}` | TransactionReceipt>
-    >();
   const chainId = useChainId();
   const publicClient = usePublicClient({
     chainId: network || chainId,
@@ -131,13 +95,7 @@ export const useERC20TransferFrom = ({ address, network }: UseERC20Params) => {
     [address, chainId, network, publicClient, writeContractAsync]
   );
 
-  useEffect(() => {
-    if (isReady && wallet) {
-      setExecute(executeFn);
-    }
-  }, [isReady, wallet, executeFn]);
-
-  return execute;
+  return executeFn;
 };
 
 /**
@@ -146,20 +104,7 @@ export const useERC20TransferFrom = ({ address, network }: UseERC20Params) => {
  * @returns execute function that calls the approve function of the ERC20 token.
  */
 export const useERC20Approve = ({ address, network }: UseERC20Params) => {
-  const { wallet, isReady } = usePrivyWagmiProvider();
   const { writeContractAsync } = useWriteContract();
-  const [execute, setExecute] =
-    useState<
-      ({
-        spender,
-        amount,
-        waitForTx,
-      }: {
-        spender: `0x${string}`;
-        amount: bigint;
-        waitForTx?: boolean;
-      }) => Promise<`0x${string}` | TransactionReceipt>
-    >();
   const chainId = useChainId();
   const publicClient = usePublicClient({
     chainId: network || chainId,
@@ -192,13 +137,7 @@ export const useERC20Approve = ({ address, network }: UseERC20Params) => {
     [address, chainId, network, publicClient, writeContractAsync]
   );
 
-  useEffect(() => {
-    if (isReady && wallet) {
-      setExecute(executeFn);
-    }
-  }, [isReady, wallet, executeFn]);
-
-  return execute;
+  return executeFn;
 };
 
 export type UseERC20AllowanceParams = UseERC20Params & {

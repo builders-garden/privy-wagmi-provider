@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
-import { erc721Abi, type TransactionReceipt } from 'viem';
+import { useCallback } from 'react';
+import { erc721Abi } from 'viem';
 import { waitForTransactionReceipt } from 'viem/actions';
 import {
   useChainId,
@@ -7,7 +7,6 @@ import {
   useReadContract,
   useWriteContract,
 } from 'wagmi';
-import { usePrivyWagmiProvider } from './privy-wagmi-provider';
 
 export type UseERC721Params = {
   address: `0x${string}`;
@@ -20,22 +19,7 @@ export type UseERC721Params = {
  * @returns execute function that calls the transfer function of the ERC721 token.
  */
 export const useERC721Transfer = ({ address, network }: UseERC721Params) => {
-  const { wallet, isReady } = usePrivyWagmiProvider();
   const { writeContractAsync } = useWriteContract();
-  const [execute, setExecute] =
-    useState<
-      ({
-        from,
-        to,
-        amount,
-        waitForTx,
-      }: {
-        from: `0x${string}`;
-        to: `0x${string}`;
-        amount: bigint;
-        waitForTx?: boolean;
-      }) => Promise<`0x${string}` | TransactionReceipt>
-    >();
   const chainId = useChainId();
   const publicClient = usePublicClient({
     chainId: network || chainId,
@@ -70,13 +54,7 @@ export const useERC721Transfer = ({ address, network }: UseERC721Params) => {
     [address, chainId, network, publicClient, writeContractAsync]
   );
 
-  useEffect(() => {
-    if (isReady && wallet) {
-      setExecute(executeFn);
-    }
-  }, [isReady, wallet, executeFn]);
-
-  return execute;
+  return executeFn;
 };
 
 /**
@@ -85,20 +63,7 @@ export const useERC721Transfer = ({ address, network }: UseERC721Params) => {
  * @returns execute function that calls the approve function of the ERC721 token.
  */
 export const useERC721Approve = ({ address, network }: UseERC721Params) => {
-  const { wallet, isReady } = usePrivyWagmiProvider();
   const { writeContractAsync } = useWriteContract();
-  const [execute, setExecute] =
-    useState<
-      ({
-        spender,
-        amount,
-        waitForTx,
-      }: {
-        spender: `0x${string}`;
-        amount: bigint;
-        waitForTx?: boolean;
-      }) => Promise<`0x${string}` | TransactionReceipt>
-    >();
   const chainId = useChainId();
   const publicClient = usePublicClient({
     chainId: network || chainId,
@@ -131,13 +96,7 @@ export const useERC721Approve = ({ address, network }: UseERC721Params) => {
     [address, chainId, network, publicClient, writeContractAsync]
   );
 
-  useEffect(() => {
-    if (isReady && wallet) {
-      setExecute(executeFn);
-    }
-  }, [isReady, wallet, executeFn]);
-
-  return execute;
+  return executeFn;
 };
 
 export type UseERC721BalanceOfParams = UseERC721Params & {
