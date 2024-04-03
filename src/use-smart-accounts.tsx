@@ -1,9 +1,13 @@
 import {
   BiconomySmartAccountV2,
   createSmartAccountClient,
+  PaymasterMode,
+  type IHybridPaymaster,
   type LightSigner,
+  type SponsorUserOperationDto,
 } from '@biconomy/account';
 import { useCallback, useEffect, useState } from 'react';
+import { encodeFunctionData } from 'viem';
 
 export type UseBiconomySmartAccountParams = {
   signer: LightSigner;
@@ -45,4 +49,91 @@ export const useBiconomySmartAccount = ({
   }, [setup]);
 
   return { smartAccount, isLoading };
+};
+
+export type SendBiconomyContractUserOp = {
+  smartAccount: BiconomySmartAccountV2;
+  address: `0x${string}`;
+  abi: any;
+  functionName: string;
+  args: any[];
+  value?: bigint;
+};
+
+export const sendBiconomyContractUserOp = async ({
+  smartAccount,
+  address,
+  abi,
+  functionName,
+  args,
+  value = 0n,
+}: SendBiconomyContractUserOp) => {
+  const data = encodeFunctionData({ abi, functionName, args });
+
+  const userOp = await smartAccount.buildUserOp([
+    {
+      to: address,
+      data,
+      value,
+    },
+  ]);
+  const biconomyPaymaster =
+    smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
+  const paymasterServiceData: SponsorUserOperationDto = {
+    mode: PaymasterMode.SPONSORED,
+    smartAccountInfo: {
+      name: 'BICONOMY',
+      version: '2.0.0',
+    },
+  };
+  const { paymasterAndData } = await biconomyPaymaster.getPaymasterAndData(
+    userOp,
+    paymasterServiceData
+  );
+  userOp.paymasterAndData = paymasterAndData;
+
+  const userOpResponse = await smartAccount.sendUserOp(userOp);
+
+  const { receipt } = await userOpResponse.wait(1);
+
+  return receipt;
+};
+
+export type SendBiconomyTransferUserOp = {
+  smartAccount: BiconomySmartAccountV2;
+  to: `0x${string}`;
+  amount: bigint;
+};
+
+export const sendBiconomyTransferUserOp = async ({
+  smartAccount,
+  to,
+  amount,
+}: SendBiconomyTransferUserOp) => {
+  const userOp = await smartAccount.buildUserOp([
+    {
+      to,
+      value: amount,
+    },
+  ]);
+  const biconomyPaymaster =
+    smartAccount.paymaster as IHybridPaymaster<SponsorUserOperationDto>;
+  const paymasterServiceData: SponsorUserOperationDto = {
+    mode: PaymasterMode.SPONSORED,
+    smartAccountInfo: {
+      name: 'BICONOMY',
+      version: '2.0.0',
+    },
+  };
+  const { paymasterAndData } = await biconomyPaymaster.getPaymasterAndData(
+    userOp,
+    paymasterServiceData
+  );
+  userOp.paymasterAndData = paymasterAndData;
+
+  const userOpResponse = await smartAccount.sendUserOp(userOp);
+
+  const { receipt } = await userOpResponse.wait(1);
+
+  return receipt;
 };
