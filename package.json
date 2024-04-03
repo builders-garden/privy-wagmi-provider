@@ -158,9 +158,9 @@
     ]
   },
   "dependencies": {
-    "@privy-io/expo": "^0.9.1",
+    "@privy-io/expo": "^0.11.1",
     "@tanstack/react-query": "^5.28.6",
-    "viem": "^2.8.16",
-    "wagmi": "^2.5.12"
+    "viem": "^2.9.8",
+    "wagmi": "^2.5.18"
   }
 }
