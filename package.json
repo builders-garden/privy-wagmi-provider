@@ -159,7 +159,7 @@
   },
   "dependencies": {
     "@biconomy/account": "^4.1.1",
-    "@privy-io/expo": "^0.11.1",
+    "@privy-io/expo": "^0.14.0",
     "@tanstack/react-query": "^5.28.6",
     "viem": "^2.9.8",
     "wagmi": "^2.5.18"
